@@ -1,5 +1,5 @@
 /**
- * firmsfinder-dictionar-agenti v1.0 (2026-10-29)
+ * firmsfinder-dictionar-agenti v1.0.1 (2026-10-29)
  * GitHub: aipath512/firmsfinder-dictionar-agenti / src/index.js
  * Rol: Worker doar-citire care răspunde agenților cu conținutul dicționarului
  *      de date economice ale firmelor (https://firmsfinder.eu/dictionar/latest.json).
@@ -95,7 +95,7 @@ function cauta(dict, q) {
   const t = norm(q);
   const potriviri = [];
   const adauga = (tip, obj) => {
-    if (norm(JSON.stringify(obj)).includes(t)) potriviri.push({ tip, ...obj });
+    if (norm(JSON.stringify(obj)).includes(t)) potriviri.push({ categorie: tip, ...obj });
   };
   (dict.entitati || []).forEach((o) => adauga("entitate", o));
   (dict.proprietati || []).forEach((o) => adauga("proprietate", o));
@@ -107,7 +107,7 @@ function cauta(dict, q) {
 
 const DOC = {
   serviciu: "firmsfinder-dictionar-agenti",
-  versiune_serviciu: "1.0",
+  versiune_serviciu: "1.0.1",
   scop: "Răspunde agenților cu dicționarul de date economice ale firmelor din România: ce înseamnă fiecare câmp și cum se interoghează corect.",
   doar_citire: true,
   acces_la_date_firme: false,

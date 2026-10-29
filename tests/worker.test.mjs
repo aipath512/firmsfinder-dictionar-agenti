@@ -65,3 +65,9 @@ test("cache: a doua cerere nu reîncarcă", async () => {
   f(sha); await incarcaDictionar(globalThis.fetch, 1000); const dupa = n; await incarcaDictionar(globalThis.fetch, 2000);
   assert.equal(n, dupa);
 });
+test("rezultatele căutării păstrează tipul proprietății și au categorie", async () => {
+  reseteazaCache(); mockFetch(sha);
+  const j = await (await get("/cauta?q=coduri_stare")).json();
+  const p = j.rezultate.find((x) => x.categorie === "proprietate" && x.nume === "coduri_stare");
+  assert.equal(p.tip, "TEXT");
+});
